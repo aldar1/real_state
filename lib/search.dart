@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_state/data.dart';
+import 'package:real_state/filter.dart';
 
 
 class Search extends StatefulWidget {
@@ -109,13 +110,17 @@ class _SearchState extends State<Search> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 16,right: 24),
-                  child: Text(
-                    'Filters',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
+                
+                GestureDetector(
+                  onTap: () => _showBottomSheet(),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 16,right: 24),
+                    child: Text(
+                      'Filters',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 )
@@ -195,6 +200,7 @@ class _SearchState extends State<Search> {
   }
 
   Widget buildProperty(Property property,int index){
+
     return Card(
       margin: const EdgeInsets.only(bottom: 24),
       clipBehavior: Clip.antiAlias,
@@ -339,6 +345,26 @@ class _SearchState extends State<Search> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showBottomSheet(){
+    showModalBottomSheet(
+      context: context, 
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30)
+        )
+      ),
+      builder: (BuildContext context){
+        return Wrap(
+          children: [
+            Filter()
+          ],
+        );
+      }
     );
   }
 }
