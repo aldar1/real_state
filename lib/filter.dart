@@ -14,10 +14,20 @@ class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right: 24,left: 24,top: 32,bottom: 24),
+      padding: const EdgeInsets.only(right: 24,left: 24,top: 28,bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              height: 3,
+              width: 50,
+              decoration: const BoxDecoration(
+                color: Colors.grey
+              ),
+            ),
+          ),
           Row(
             children: const [
               Text(

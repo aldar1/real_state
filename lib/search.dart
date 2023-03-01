@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_state/data.dart';
+import 'package:real_state/detail.dart';
 import 'package:real_state/filter.dart';
 
 
@@ -110,7 +111,6 @@ class _SearchState extends State<Search> {
                     ),
                   ),
                 ),
-                
                 GestureDetector(
                   onTap: () => _showBottomSheet(),
                   child: const Padding(
@@ -201,147 +201,154 @@ class _SearchState extends State<Search> {
 
   Widget buildProperty(Property property,int index){
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 24),
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15)
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context, MaterialPageRoute(
+          builder: (context) => Detail(property: property)
+        )
       ),
-      child: Container(
-        height: 210,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(property.frontImage),
-            fit: BoxFit.cover
-          )
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 24),
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15)
         ),
         child: Container(
-          padding: const EdgeInsets.all(20),
+          height: 210,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: const [0.5,1.0],
-              colors: [
-                Colors.transparent,
-                Colors.black.withOpacity(0.7)
-              ]
+            image: DecorationImage(
+              image: AssetImage(property.frontImage),
+              fit: BoxFit.cover
             )
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.yellow[700],
-                  borderRadius: BorderRadius.circular(5)
-                ),
-                width: 80,
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Center(
-                  child: Text(
-                    'FOR ${property.label}',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.5,1.0],
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withOpacity(0.7)
+                ]
+              )
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.yellow[700],
+                    borderRadius: BorderRadius.circular(5)
+                  ),
+                  width: 80,
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Center(
+                    child: Text(
+                      'FOR ${property.label}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(child: Container()),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        property.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      Text(
-                        r'$'+property.price,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                      )
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.location_on,
+                Expanded(child: Container()),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          property.name,
+                          style: const TextStyle(
                             color: Colors.white,
-                            size: 14,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
                           ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            property.location,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Icon(
-                            Icons.zoom_out_map,
+                        ),
+                        Text(
+                          r'$'+property.price,
+                          style: const TextStyle(
                             color: Colors.white,
-                            size: 14,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
                           ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            '${property.sqm} sq/m',
-                            style: const TextStyle(
+                        )
+                      ],
+                    ),
+    
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on,
                               color: Colors.white,
-                              fontSize: 14
+                              size: 14,
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.yellow[700],
-                            size: 14,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            '${property.review} Reviews',
-                            style: const TextStyle(
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              property.location,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            const Icon(
+                              Icons.zoom_out_map,
                               color: Colors.white,
-                              fontSize: 14
+                              size: 14,
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
-              )
-            ],
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              '${property.sqm} sq/m',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow[700],
+                              size: 14,
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              '${property.review} Reviews',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
