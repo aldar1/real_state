@@ -1,6 +1,6 @@
 # real_state
 
-A new Flutter project.
+A new Flutter project v3.7.5.
 
 ## Getting Started
 
